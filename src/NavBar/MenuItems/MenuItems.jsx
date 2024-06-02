@@ -16,10 +16,10 @@ const MenuItems = () => {
     }
 
     const links = <>
-        <NavLink to="/" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-blue-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Home</NavLink>
-        <NavLink to="/all-contests" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-blue-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>All Contests</NavLink>
-        <NavLink to="/abc" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-blue-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Extra Route 1</NavLink>
-        <NavLink to="/xyz" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-blue-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Extra Route 2</NavLink>
+        <NavLink to="/" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Home</NavLink>
+        <NavLink to="/all-contests" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>All Contests</NavLink>
+        <NavLink to="/extraRoute1" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Extra Route 1</NavLink>
+        <NavLink to="/extraRoute2" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Extra Route 2</NavLink>
     </>
 
     return (

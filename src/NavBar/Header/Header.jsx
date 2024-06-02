@@ -4,8 +4,12 @@ import { useEffect } from "react";
 import { MdEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
 import logoPic from '../../../public/logo.png';
+import { BiNoEntry } from "react-icons/bi";
+import useAuth from "../../Hooks/useAuth/useAuth";
 
 const Header = () => {
+
+    const { user } = useAuth();
 
     const [isChecked, SetIsChecked] = useState(localStorage.getItem('theme') === 'dark');
 
@@ -28,7 +32,7 @@ const Header = () => {
 
                     <img className="w-8 lg:w-10 xl:w-12" src={logoPic} alt="...Loading" />
 
-                    <h4 className="text-xl lg:text-2xl uppercase font-extrabold text-yellow-500">contest<span className="text-blue-500">hub</span></h4>
+                    <h4 className="text-xl lg:text-2xl uppercase font-extrabold text-yellow-500">contest<span className="text-sky-500">hub</span></h4>
 
                 </Link>
 
@@ -50,13 +54,23 @@ const Header = () => {
 
                 <div className=" flex items-center justify-between md:justify-end gap-x-6 md:gap-x-4 lg:gap-x-6 xl:gap-x-8">
 
+                    {
+                        user ?
+                            <div className="text-sm md:text-base flex items-center justify-start gap-x-2 ">
+                                <MdEmail className="text-xl" />
 
-                    <div className="text-sm md:text-base flex items-center justify-start gap-x-2 ">
-                        <MdEmail className="text-xl" />
+                                {/* need to show the user email */}
+                                <h6>noreply@gmail.com</h6>
+                            </div>
+                            :
+                            <div className="text-sm md:text-base flex items-center justify-start gap-x-2 ">
+                                <BiNoEntry className="text-xl" />
 
-                        {/* need to show the user email */}
-                        <h6>noreply@gmail.com</h6>
-                    </div>
+                                {/* need to show the user email */}
+                                <h6>User not Logged In</h6>
+                            </div>
+                    }
+
 
                     <div className="scale-75 md:scale-90" >
                         <label className="flex cursor-pointer gap-2">
