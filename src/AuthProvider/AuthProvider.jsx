@@ -34,24 +34,70 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     }
 
-    const logOutUser = () => {
+    //-----------------------------------------------------------------------------------------------
+
+    // const logOutUser = async () => {
+    //     SetLoading(true);
+    //     await axiosPublic.get('/logout');
+    //     return signOut(auth);
+    // }
+
+    //-----------------------------------------------------------------------------------------------
+
+    const logOutUser = async () => {
         SetLoading(true);
         return signOut(auth);
     }
 
     useEffect(() => {
-        const unSubcribe = onAuthStateChanged(auth, (currentUser) => {
+        const unSubcribe = onAuthStateChanged(auth, async (currentUser) => {
 
+            //-----------------------------------------------------------------------------------------------
+
+            // if (currentUser) {
+            //     SetUser(currentUser);
+            //     const userInfo = { email: currentUser?.email };
+            //     console.log('SignIn Section', userInfo)
+            //     await axiosPublic.post('/jwt', userInfo);                
+            //     SetLoading(false);
+            // } 
+            // else {
+            //     SetUser(null);
+            //     // await axiosPublic.get('/logout');
+            //     SetLoading(false);
+            // }
+
+            //-----------------------------------------------------------------------------------------------
+
+            // SetUser(currentUser);
+
+            // if (currentUser) {
+            //     const userInfo = { email: currentUser?.email };
+            //     console.log('SignIn Section', userInfo)
+            //     await axiosPublic.post('/jwt', userInfo);
+            // }
+
+            // SetLoading(false);
+
+            //-------------------------------------------------------------------------------------------------------------
+
+
+            //--------------------------------------------local Storage---------------------------------------------------
+
+            SetUser(currentUser);
             if (currentUser) {
                 const userInfo = { email: currentUser?.email };
-                axiosPublic.post('/jwt', userInfo);
-                SetUser(currentUser);
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token)
+                        }
+                    })
                 SetLoading(false);
-
-            } else {
-                const userInfo = { email: currentUser?.email };
-                axiosPublic.get('/removeToken', userInfo);
+            }
+            else {
                 SetUser(null);
+                localStorage.removeItem('access-token');
                 SetLoading(false);
             }
 

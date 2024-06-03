@@ -1,8 +1,56 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logoPic from '../../../public/logo.png';
 import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import useAuth from "../../Hooks/useAuth/useAuth";
 
 const LogInPage = () => {
+
+    const { signInUserManually, googleSignIn } = useAuth();
+
+    const [showPassWord, SetShowPassWord] = useState(false);
+
+    const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+    const onSubmit = async (data) => {
+
+        const { email, password } = data;
+
+        try {
+            await signInUserManually(email, password)
+            toast.success('Login Successful');
+            navigate(location.state ? location?.state : '/logInPage');
+        } catch (err) {
+            toast(err.message);
+        }
+
+    }
+
+    const handleGoogleLogInButton = async () => {
+        try {
+            await googleSignIn();
+            toast.success('Login Successful');
+            navigate(location.state ? location?.state : '/logInPage');
+        } catch (err) {
+            toast(err.message);
+        }
+    }
+
+    const handleshowPassWordButton = () => {
+        SetShowPassWord(!showPassWord);
+    }
+
     return (
 
         <div className="bg-sky-500 flex justify-center items-center w-full min-h-full xl:min-h-screen">
@@ -27,19 +75,29 @@ const LogInPage = () => {
                         <Link to="/registrationPage" rel="noopener noreferrer" className="focus:underline hover:underline text-amber-400 font-semibold hover:text-amber-500 "><span> Register Now</span></Link>
                     </p>
 
-                    <form className="space-y-6 md:space-y-8 xl:space-y-12">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 md:space-y-8 xl:space-y-12">
                         <div className="space-y-4">
+
                             <div className="space-y-2">
                                 <label htmlFor="email" className="block text-sm md:text-base xl:text-lg">Email address</label>
-                                <input type="email" name="email" id="email" placeholder="Enter Your Email Address" className="w-full px-3 py-2 md:py-3 xl:py-4 border rounded-md border-neutral-300 bg-transparent text-gray-900 text-sm md:text-base xl:text-lg focus:border-violet-400" />
-
+                                <input type="email" name="email" id="email" placeholder="Enter Your Email Address" className="w-full px-3 py-2 md:py-3 xl:py-4 border rounded-md border-neutral-300 bg-transparent text-gray-900 text-sm md:text-base xl:text-lg focus:border-violet-400" {...register("email", { required: true })} />
+                                {errors.email && <span className="text-red-500">This field is required</span>}
                             </div>
-                            <div className="space-y-2">
+
+                            <div className="space-y-2 relative">
                                 <div className="flex justify-between">
                                     <label htmlFor="password" className="text-sm md:text-base xl:text-lg">Password</label>
                                     <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-gray-400">Forgot password?</a>
                                 </div>
-                                <input type="password" name="password" id="password" placeholder="Enter Your Password" className="w-full px-3 py-2 md:py-3 xl:py-4 border rounded-md border-neutral-300 bg-transparent text-gray-900 text-sm md:text-base xl:text-lg focus:border-violet-400" />
+                                <input type={showPassWord ? 'text' : 'password'} name="password" id="password" placeholder="Enter Your Password" className="w-full px-3 py-2 md:py-3 xl:py-4 border rounded-md border-neutral-300 bg-transparent text-gray-900 text-sm md:text-base xl:text-lg focus:border-violet-400" {...register("password", { required: true })} />
+                                {errors.password && <span className="text-red-500">This field is required</span>}
+                                <div onClick={handleshowPassWordButton} className="absolute text-sm md:text-base xl:text-lg top-8  md:top-10 xl:top-12 right-4 text-neutral-500">
+
+                                    {
+                                        showPassWord ? <FaEyeSlash /> : <FaEye />
+                                    }
+
+                                </div>
 
                             </div>
                         </div>
@@ -53,7 +111,7 @@ const LogInPage = () => {
                         <hr className="w-full text-gray-400" />
                     </div>
 
-                    <div className="my-6 space-y-4">
+                    <div onClick={handleGoogleLogInButton} className="my-6 space-y-4">
                         <button aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-600 focus:dark:ring-violet-600 text-sm md:text-base lg:text-lg">
                             <FcGoogle className="text-xl xl:text-2xl " />
                             <p>Login with Google</p>

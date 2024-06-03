@@ -60,7 +60,7 @@ const Header = () => {
                                 <MdEmail className="text-xl" />
 
                                 {/* need to show the user email */}
-                                <h6>noreply@gmail.com</h6>
+                                <h6>{user?.email}</h6>
                             </div>
                             :
                             <div className="text-sm md:text-base flex items-center justify-start gap-x-2 ">

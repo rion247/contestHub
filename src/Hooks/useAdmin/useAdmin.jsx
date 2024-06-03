@@ -21,8 +21,6 @@ const useAdmin = () => {
         }
     })
 
-    // if (isLoading) return <LoadingSpinner />
-
     if (error) return toast.error(error.message);
 
     return [isAdmin, isAdminLoading]

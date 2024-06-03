@@ -2,14 +2,15 @@ import Container from "../../components/Shared/Container";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from './../../Hooks/useAuth/useAuth';
 import userPic from '../../assets/user.png'
+import { toast } from "react-toastify";
 
 const MenuItems = () => {
-    const { user, logOutUser } = useAuth();
-
+    const { user, logOutUser} = useAuth();
 
     const handleLogOutButton = async () => {
         try {
             await logOutUser();
+            toast('User Logged Out Successfully');
         } catch (err) {
             console.log(err.message);
         }
@@ -48,7 +49,7 @@ const MenuItems = () => {
                     <div className="dropdown dropdown-end md:mr-1 lg:mr-3 xl:mr-4">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-6 md:w-7 lg:w-8 xl:w-9 rounded-full">
-                                <img alt="...Loading" src={userPic} />
+                                <img alt="...Loading" src={user ? user.photoURL : userPic} />
                             </div>
                         </div>
                         {
