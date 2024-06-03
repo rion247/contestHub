@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import logoPic from '../../../public/logo.png';
 import { BiNoEntry } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth/useAuth";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 
 const Header = () => {
 
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
     const [isChecked, SetIsChecked] = useState(localStorage.getItem('theme') === 'dark');
 
@@ -18,6 +19,10 @@ const Header = () => {
         document.querySelector('html').setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
     }, [isChecked])
+
+    if (loading) {
+        return <LoadingSpinner />
+    }
 
     const handleThemeButton = () => {
         SetIsChecked(!isChecked)

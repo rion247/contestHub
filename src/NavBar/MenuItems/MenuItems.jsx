@@ -3,9 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from './../../Hooks/useAuth/useAuth';
 import userPic from '../../assets/user.png'
 import { toast } from "react-toastify";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 
 const MenuItems = () => {
-    const { user, logOutUser} = useAuth();
+    const { user, logOutUser, loading } = useAuth();
+
+    if (loading) {
+        return <LoadingSpinner />
+    }
 
     const handleLogOutButton = async () => {
         try {
