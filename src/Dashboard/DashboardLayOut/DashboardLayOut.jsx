@@ -39,7 +39,7 @@ const DashboardLayOut = () => {
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-center relative">
                 <Outlet />
-                <label htmlFor="my-drawer-2" className=" p-2 bg-transparent border-transparent outline-transparent drawer-button lg:hidden text-lg  md:text-xl absolute right-2 top-2"><HiMiniBars3CenterLeft /></label>
+                <label htmlFor="my-drawer-2" className=" p-2 bg-transparent border-transparent outline-transparent drawer-button lg:hidden text-lg  md:text-xl absolute right-2 md:right-6 top-2"><HiMiniBars3CenterLeft /></label>
 
             </div>
             <div className="drawer-side ">

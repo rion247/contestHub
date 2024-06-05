@@ -9,7 +9,7 @@ import useAuth from "../../Hooks/useAuth/useAuth";
 
 const LogInPage = () => {
 
-    const { signInUserManually, googleSignIn } = useAuth();
+    const { signInUserManually, googleSignIn, SetLoading } = useAuth();
 
     const [showPassWord, SetShowPassWord] = useState(false);
 
@@ -33,6 +33,7 @@ const LogInPage = () => {
             navigate(location.state ? location?.state : '/logInPage');
         } catch (err) {
             toast(err.message);
+            SetLoading(false);
         }
 
     }

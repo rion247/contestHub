@@ -100,12 +100,12 @@ const RegistrationPage = () => {
                 .catch((error) => {
 
                     const errorMessage = error.message;
-                    toast(errorMessage);
+                    return toast(errorMessage);
 
                 });
 
         } catch (err) {
-            toast.error(err.message)
+            return toast.error(err.message)
         }
 
     }
