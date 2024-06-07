@@ -39,14 +39,15 @@ const MyCreatedContest = () => {
                             <th>Serial No</th>
                             <th>Contest Name</th>
                             <th>Status</th>
-                            <th>Edit or Delete</th>                            
+                            <th>Edit or Delete</th>
                             <th>Call To Action</th>
                         </tr>
-                    </thead>                    
+                    </thead>
 
-                        {
-                            contests.map((item, index) => <TableforMyCreatedContest key={item._id} index={index+1} item={item} refetch={refetch}/>)
-                        }                 
+                    {
+                        contests.map((item, index) => <TableforMyCreatedContest key={item._id} index={index + 1} item={item} refetch={refetch} />)
+                    }
+                    
                 </table>
 
             </div>

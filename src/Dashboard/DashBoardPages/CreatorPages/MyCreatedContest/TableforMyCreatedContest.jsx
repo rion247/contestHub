@@ -5,8 +5,10 @@ import useAxiosPublic from './../../../../Hooks/useAxiosPublic/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { Form, Input, Modal, message } from "antd";
+import { DatePicker, Form, Input, Modal, Select, message } from "antd";
+import { Option } from "antd/es/mentions";
 import useAuth from "../../../../Hooks/useAuth/useAuth";
+import { toast } from "react-toastify";
 
 const TableforMyCreatedContest = ({ index, item, refetch }) => {
 
@@ -18,19 +20,25 @@ const TableforMyCreatedContest = ({ index, item, refetch }) => {
 
     const { user } = useAuth();
 
+    const userEmail = user.email;
 
-    const userName = user?.displayName;
-    const userEmail = user?.email;
-
-   
-
+    const contestStatus = item?.contestStatus;
 
     const initialValues = {
-        username: userName,
-        email: userEmail,
+        contestName: item?.contestName,
+        contestImageURL: item?.contestImageURL,
+        contestTypeTags: item?.contestTypeTags,
+        contestContestCategory: item?.contestContestCategory,
+        contestPrice: item?.contestPrice,
+        prizeMoney: item?.prizeMoney,
+        contestDescription: item?.contestDescription,
+        taskSubmissionTextInstruction: item?.taskSubmissionTextInstruction,
+        creatorEmail: item?.creatorEmail,
+        creatorName: item?.creatorName,
+        // _id: item?._id,
     };
 
-    console.log(initialValues.username)
+    // console.log(initialValues)
 
     const { mutateAsync } = useMutation({
         mutationFn: async (id) => {
@@ -68,13 +76,55 @@ const TableforMyCreatedContest = ({ index, item, refetch }) => {
     }
 
     const showModal = () => {
+        if (contestStatus === 'accepted') {
+            return toast('The editing option is disabled for this contest.');
+        }
         setIsModalOpen(true);
     };
 
-    // const handleApplyButton = (_id) => {
-    //     console.log(_id)
-    //     showModal();
-    // }
+    const handleOk = () => {
+
+        form
+            .validateFields()
+            .then(async values => {
+
+                const { contestName, contestTypeTags, contestContestCategory, contestPrice, prizeMoney, contestDescription, taskSubmissionTextInstruction, creatorEmail, contestPostingDate, contestDeadlineDate, contestImageURL } = values;
+
+                if (creatorEmail !== userEmail) {
+                    return toast.error('Forbidden Error')
+                }
+
+                const contestPriceNumber = parseFloat(contestPrice);
+                const prizeMoneyNumber = parseFloat(prizeMoney);
+
+                const updateContestData = {
+                    contestName,
+                    contestTypeTags,
+                    contestContestCategory,
+                    contestPrice: contestPriceNumber,
+                    prizeMoney: prizeMoneyNumber,
+                    contestDescription,
+                    taskSubmissionTextInstruction,
+                    contestPostingDate,
+                    contestDeadlineDate,
+                    contestImageURL
+                }
+
+                // console.log(updateContestData)
+
+                const res = await axiosPublic.patch(`/contestData/${item._id}`, updateContestData);
+                setIsModalOpen(false);
+
+                if (res.data.modifiedCount > 0) {
+                    return toast.success('Data Updated Successfully!!!')
+                }
+
+            })
+            .catch(errorInfo => {
+                console.error('Validation failed:', errorInfo);
+            });
+
+    };
 
     const onFinish = () => {
         message.success('Submit success!');
@@ -88,37 +138,20 @@ const TableforMyCreatedContest = ({ index, item, refetch }) => {
         setIsModalOpen(false);
     };
 
-    const handleOk = () => {
-
-        form
-            .validateFields()
-            .then(values => {
-                console.log(values)
-
-
-            })
-            .catch(errorInfo => {
-                console.error('Validation failed:', errorInfo);
-            });
-
-    };
-
-
-
     return (
 
         <tbody className="capitalize" >
 
             <tr className="border border-neutral-300">
                 <th>{index}</th>
-                <td>{item.contestName}</td>
-                <td>{item.contestStatus}</td>
+                <td>{item?.contestName}</td>
+                <td>{item?.contestStatus}</td>
 
                 <td className="flex justify-center cursor-pointer items-center gap-4 flex-col"><BiSolidEdit onClick={showModal} /> <AiOutlineDelete onClick={() => handleDeleteButton(item._id)} className=" text-red-500" /></td>
                 <td ><Link className="text-center bg-sky-500 text-white px-2 py-1 rounded cursor-pointer" to='/dashboard/contestsubmittedpage'>Submission</Link></td>
             </tr>
 
-            <Modal title="Apply For The Job" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Submit">
+            <Modal title="Contest Data Edit Form" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Submit">
 
                 <Form
                     name="wrap"
@@ -133,20 +166,89 @@ const TableforMyCreatedContest = ({ index, item, refetch }) => {
                     form={form}
                     initialValues={initialValues}
                 >
-                    <Form.Item label="User Name" name="username" rules={[{ required: true }]}>
-                        <Input readOnly defaultValue={initialValues?.username} />                       
+
+                    <Form.Item label="Contest Name" name="contestName">
+                        <Input defaultValue={initialValues.contestName} />
                     </Form.Item>
 
-                    <Form.Item label="Email Address" name="email" rules={[{ required: true }]}>
-                        <Input readOnly defaultValue={initialValues.email} />
+                    <Form.Item label="Contest Image" name="contestImageURL">
+                        <Input defaultValue={initialValues.contestImageURL} />
                     </Form.Item>
 
                     <Form.Item
-                        name="url"
-                        label="Your Resume URL"
-                        rules={[{ required: true, message: 'Please input the URL' }, { type: 'url', warningOnly: true }, { type: 'string', min: 6 }]}
+                        name="contestTypeTags"
+                        label="Contest Type/Tags"
                     >
-                        <Input placeholder="Enter Resume Link Here" />
+                        <Select placeholder={initialValues.contestTypeTags}>
+                            <Option value="imageDesignContests">Image Design Contests</Option>
+                            <Option value="articleWriting">Article Writing</Option>
+                            <Option value="marketingStrategy">Marketing Strategy</Option>
+                            <Option value="digitalAdvertisementContests">Digital Advertisement Contests</Option>
+                            <Option value="gamingReview">Gaming Review</Option>
+                            <Option value="bookReview">Book Review</Option>
+                            <Option value="gamingReview">Gaming Review</Option>
+                            <Option value="businessIdeaConcerts">Business Idea Concerts</Option>
+                            <Option value="movieReview">Movie Review</Option>
+                        </Select>
+                    </Form.Item>
+
+                    <Form.Item
+                        name="contestContestCategory"
+                        label="Contest Category"
+                    >
+                        <Select placeholder={initialValues.contestContestCategory}>
+                            <Option value="popular">Popular</Option>
+                            <Option value="trending">Trending</Option>
+                            <Option value="new">New</Option>
+                        </Select>
+                    </Form.Item>
+
+                    <Form.Item label="Contest Price" name="contestPrice">
+                        <Input type="number" defaultValue={initialValues.contestPrice} />
+                    </Form.Item>
+
+                    <Form.Item label="Prize Money or Others" name="prizeMoney">
+                        <Input defaultValue={initialValues.prizeMoney} />
+                    </Form.Item>
+
+                    <Form.Item label="Contest Description" name="contestDescription">
+                        <Input defaultValue={initialValues.contestDescription} />
+                    </Form.Item>
+
+                    <Form.Item label="Task Submission Text Instruction" name="taskSubmissionTextInstruction">
+                        <Input defaultValue={initialValues.taskSubmissionTextInstruction} />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="contestPostingDate"
+                        label="Contest Posting Date"
+                        dateFormat="dd-MM-yyyy"
+                        rules={[{ required: true, message: 'Please select the Contest Posting Date' }]}
+                    >
+                        <DatePicker
+                            selected={form.getFieldValue('contestPostingDate')}
+                            onChange={date => form.setFieldsValue({ contestPostingDate: date })}
+                        />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="contestDeadlineDate"
+                        label="Contest Deadline Date"
+                        dateFormat="dd-MM-yyyy"
+                        rules={[{ required: true, message: 'Please select the Contest Deadline Date' }]}
+                    >
+                        <DatePicker
+                            selected={form.getFieldValue('contestDeadlineDate')}
+                            onChange={date => form.setFieldsValue({ contestDeadlineDate: date })}
+                        />
+                    </Form.Item>
+
+                    <Form.Item label="Email Address" name="creatorEmail">
+                        <Input readOnly defaultValue={initialValues?.creatorEmail} />
+                    </Form.Item>
+
+                    <Form.Item label="User Name" name="creatorName">
+                        <Input readOnly defaultValue={initialValues.creatorName} />
                     </Form.Item>
 
                 </Form>
