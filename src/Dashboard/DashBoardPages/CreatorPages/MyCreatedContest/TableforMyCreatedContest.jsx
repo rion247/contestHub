@@ -148,6 +148,9 @@ const TableforMyCreatedContest = ({ index, item, refetch }) => {
 
                 <td className="flex justify-center cursor-pointer items-center gap-4 flex-col"><BiSolidEdit onClick={showModal} /> <AiOutlineDelete onClick={() => handleDeleteButton(item._id)} className=" text-red-500" /></td>
                 <td ><Link className="text-center bg-sky-500 text-white px-2 py-1 rounded cursor-pointer" to='/dashboard/contestsubmittedpage'>Submission</Link></td>
+                <td>
+                    {item?.contestComment ? item?.contestComment : 'No Comments'}
+                </td>
             </tr>
 
             <Modal title="Contest Data Edit Form" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Submit">

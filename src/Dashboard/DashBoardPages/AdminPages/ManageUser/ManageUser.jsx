@@ -13,7 +13,6 @@ const ManageUser = () => {
         queryKey: ['usersData'],
         queryFn: async () => {
             const { data } = await axiosPublic('/users');
-            data.role === 'admin' && data.delete;
             return data;
         }
     })

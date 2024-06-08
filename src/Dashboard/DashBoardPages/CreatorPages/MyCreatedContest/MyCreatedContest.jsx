@@ -41,6 +41,7 @@ const MyCreatedContest = () => {
                             <th>Status</th>
                             <th>Edit or Delete</th>
                             <th>Call To Action</th>
+                            <th>Comment</th>
                         </tr>
                     </thead>
 

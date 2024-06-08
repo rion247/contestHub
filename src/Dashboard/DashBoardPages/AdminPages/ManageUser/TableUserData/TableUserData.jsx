@@ -26,13 +26,13 @@ const TableUserData = ({ user, index, refetch }) => {
     })
 
     const userRole = {
-        role: `${user?.role === 'user' ? 'Contest Creator' : 'user'}`
+        role: `${user?.role === 'user' ? 'creator' : 'user'}`
     }
 
     const handleUserRole = (email) => {
 
         Swal.fire({
-            title: `Update ${email} role from ${user?.role === 'user' ? 'User' : 'Contest Creator'} to ${user?.role === 'user' ? 'Contest Creator' : 'User'}`,
+            title: `Update ${email} role from ${user?.role === 'user' ? 'User' : 'Contest Creator'} to ${user?.role === 'creator' ? 'Contest Creator' : 'User'}`,
             text: "You won't be able to revert this!",
             icon: "question",
             showCancelButton: true,
