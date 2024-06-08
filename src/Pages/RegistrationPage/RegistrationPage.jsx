@@ -72,7 +72,8 @@ const RegistrationPage = () => {
                 photoURL,
                 password,
                 role: 'user',
-                status: 'Verified'
+                status: 'Verified',
+                condition: 'unblock',
             }
 
             createUserManually(email, password)

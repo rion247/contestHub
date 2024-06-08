@@ -110,7 +110,6 @@ const TableforMyCreatedContest = ({ index, item, refetch }) => {
                     contestImageURL
                 }
 
-                // console.log(updateContestData)
 
                 const res = await axiosPublic.patch(`/contestData/${item._id}`, updateContestData);
                 setIsModalOpen(false);
