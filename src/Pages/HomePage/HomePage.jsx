@@ -1,9 +1,11 @@
 import HeroBanner from "./HeroBanner/HeroBanner";
+import PopularContestSection from "./PopularContestSection/PopularContestSection";
 
 const HomePage = () => {
     return (
         <div>
-            <HeroBanner/>
+            <HeroBanner />
+            <PopularContestSection />
         </div>
     );
 };
