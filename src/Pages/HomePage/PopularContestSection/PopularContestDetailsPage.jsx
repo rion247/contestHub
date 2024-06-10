@@ -26,7 +26,7 @@ const PopularContestDetailsPage = () => {
 
     const postingDate = contestPostingDate.split('T')[0];
     const deadlineDate = contestDeadlineDate.split('T')[0];
-    
+
     return (
         <div className="max-w-[350px] p-4 mx-auto md:max-w-xl lg:max-w-4xl xl:max-w-7xl  mt-4 md:mt-6 lg:mt-8 xl:mt-32 font-poppins text-black mb-16 md:mb-20 lg:mb-32 xl:mb-40">
 
@@ -36,45 +36,45 @@ const PopularContestDetailsPage = () => {
 
                     <span className="text-sm text-neutral-600 italic">Contest ID: {_id}</span>
 
-                    <h3 className="text-lg md:text-xl lg::text-2xl font-semibold sm:text-4xl mt-6 md:mt-12 py-4 border-dashed border-y border-neutral-300 mb-4 md:mb-10">{contestName}</h3>
+                    <h3 className="text-sm md:text-base lg:text-lg xl:text-xl font-semibold mt-6 md:mt-12 py-4 border-dashed border-y border-neutral-300 mb-4 md:mb-10">{contestName}</h3>
 
                     <h6 className="text-sm text-sky-500 uppercase">{contestTypeTags}</h6>
 
 
-                    <p className="text-xs md:text-sm lg:text-base text-neutral-500 text-justify py-4 border-dashed border-b border-transparent mb-4 md:mb-10">{contestDescription}</p>
+                    <p className="text-xs md:text-sm lg:text-base text-neutral-500 text-justify py-0 md:py-4 border-dashed border-b border-transparent mt-0 mb-4 md:mb-10">{contestDescription}</p>
 
                     <div className="pb-4 border-dashed border-b border-neutral-300  ">
 
-                        <h3 className="text-lg md:text-xl lg::text-2xl font-semibold sm:text-4xl mb-2 md:mb-6 underline">Task Submission Text Instruction</h3>
+                        <h3 className="text-sm md:text-base lg:text-lg xl:text-xl font-semibold sm:text-4xl mb-2 md:mb-6 underline">Task Submission Text Instruction</h3>
                         <p className="text-xs md:text-sm lg:text-base text-neutral-500 text-justify mb-4 md:mb-6">{taskSubmissionTextInstruction}</p>
 
                         <div className="grid grid-cols-1 gap-4">
 
                             <div className="flex items-center justify-start gap-2 text-black">
 
-                                <h6 className="text-base font-medium">Contest Posting Date:</h6>
-                                <h6 className="text-base font-medium ">{postingDate}</h6>
+                                <h6 className="text-sm md:text-base font-medium">Contest Posting Date:</h6>
+                                <h6 className="text-sm md:text-basefont-medium ">{postingDate}</h6>
 
                             </div>
 
                             <div className="flex items-center justify-start gap-2 text-black">
 
-                                <h6 className="text-base font-medium">Contest Deadline Date:</h6>
-                                <h6 className="text-base font-medium ">{deadlineDate}</h6>
+                                <h6 className="text-sm md:text-base font-medium">Contest Deadline Date:</h6>
+                                <h6 className="text-sm md:text-basefont-medium ">{deadlineDate}</h6>
 
                             </div>
 
                             <div className="flex items-center justify-start gap-2">
 
-                                <h6 className=" text-sm md:text-base lg:text-lg font-medium">Contest Price:</h6>
-                                <h6 className="text-lg md:text-xl lg:text-2xl text-sky-500 font-medium ">${contestPrice}</h6>
+                                <h6 className=" text-sm md:text-base font-medium">Contest Price:</h6>
+                                <h6 className="text-sm md:text-base text-sky-500 font-medium ">${contestPrice}</h6>
 
                             </div>
 
                             <div className="flex items-center justify-start gap-2">
 
-                                <h6 className=" text-sm md:text-base lg:text-lg font-medium">Contest Prize Money:</h6>
-                                <h6 className="text-lg md:text-xl lg:text-2xl text-sky-500 font-medium ">${prizeMoney}</h6>
+                                <h6 className=" text-sm md:text-base font-medium">Contest Prize Money:</h6>
+                                <h6 className="text-sm md:text-base text-sky-500 font-medium ">${prizeMoney}</h6>
 
                             </div>
 
@@ -106,15 +106,15 @@ const PopularContestDetailsPage = () => {
 
                         <div className="flex items-center justify-start gap-2 ">
 
-                            <h6 className="text-base font-medium">Creator Name:</h6>
-                            <h6 className="text-base font-medium ">{creatorName}</h6>
+                            <h6 className="text-sm md:text-base font-medium">Creator Name:</h6>
+                            <h6 className="text-sm md:text-base font-medium">{creatorName}</h6>
 
                         </div>
 
                         <div className="flex items-center justify-start gap-2">
 
-                            <h6 className="text-base font-medium">Creator Email:</h6>
-                            <h6 className="text-base font-medium ">{creatorEmail}</h6>
+                            <h6 className="text-sm md:text-base font-medium">Creator Email:</h6>
+                            <h6 className="text-sm md:text-base font-medium">{creatorEmail}</h6>
 
                         </div>
 

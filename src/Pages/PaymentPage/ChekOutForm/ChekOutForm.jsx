@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import Container from "../../../components/Shared/Container";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
-import { useLoaderData} from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth/useAuth";
 
 const ChekOutForm = () => {
@@ -28,10 +28,10 @@ const ChekOutForm = () => {
     useEffect(() => {
         // fetch client secret
         if (totalPrice > 1) {
-           axiosSecure.post('/create-payment-intent', price)
-           .then(res=>{
-            SetClientSecret(res.data.clientSecret)
-           })
+            axiosSecure.post('/create-payment-intent', price)
+                .then(res => {
+                    SetClientSecret(res.data.clientSecret)
+                })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -77,7 +77,8 @@ const ChekOutForm = () => {
         } else {
             console.log('Payment Intent', paymentIntent)
             if (paymentIntent.status == 'succeeded') {
-                SetTransactionId('Transaction ID', paymentIntent.id)
+                // --------------------------------------------------------
+                SetTransactionId(paymentIntent.id)
             }
         }
     };
@@ -103,7 +104,7 @@ const ChekOutForm = () => {
                         },
                     }}
                 />
-                <button className="btn bg-sky-500 space-y-4" type="submit" >
+                <button disabled={!stripe || !clientSecret} className="btn bg-sky-500 space-y-4" type="submit" >
                     Pay
                 </button>
 

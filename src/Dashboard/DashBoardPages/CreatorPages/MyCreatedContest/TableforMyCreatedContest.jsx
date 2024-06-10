@@ -90,6 +90,7 @@ const TableforMyCreatedContest = ({ index, item, refetch }) => {
 
                 const { contestName, contestTypeTags, contestContestCategory, contestPrice, prizeMoney, contestDescription, taskSubmissionTextInstruction, creatorEmail, contestPostingDate, contestDeadlineDate, contestImageURL } = values;
 
+
                 if (creatorEmail !== userEmail) {
                     return toast.error('Forbidden Error')
                 }
@@ -109,7 +110,6 @@ const TableforMyCreatedContest = ({ index, item, refetch }) => {
                     contestDeadlineDate,
                     contestImageURL
                 }
-
 
                 const res = await axiosPublic.patch(`/contestData/${item._id}`, updateContestData);
                 setIsModalOpen(false);

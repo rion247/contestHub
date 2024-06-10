@@ -22,7 +22,7 @@ const PopularContestSection = () => {
 
 
     return (
-        <div className="font-poppins mt-10 md:mt-16 lg:mt-24 xl:mt-32 text-center container mx-auto">
+        <div className="font-poppins mt-10 md:mt-16 lg:mt-24 xl:mt-32 text-center container mx-auto mb-8 md:mb-16 lg:mb-24 xl:mb-32">
 
             <h4 className="text-xl md:text-2xl lg:text-3xl xl:text-5xl font-semibold mb-3">Popular Contest Section</h4>
 
@@ -33,7 +33,7 @@ const PopularContestSection = () => {
             <div className="max-w-xs md:max-w-2xl xl:max-w-full mx-auto grid grid-cols-1 xl:grid-cols-2 gap-6" >
 
                 {
-                    contestData.map(contest => <SinglePopularContest key={contest._id} contest={contest}></SinglePopularContest>)
+                    contestData.filter(item => item.contestStatus === 'accepted' && item.contestContestCategory === 'popular').slice(0,6).map(contest => <SinglePopularContest key={contest._id} contest={contest}></SinglePopularContest>)
                 }
 
             </div>
