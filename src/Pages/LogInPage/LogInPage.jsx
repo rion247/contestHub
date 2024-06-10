@@ -6,16 +6,19 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic/useAxiosPublic";
 
 const LogInPage = () => {
 
-    const { signInUserManually, googleSignIn, SetLoading } = useAuth();
+    const { signInUserManually, googleSignIn, SetLoading, SetReload } = useAuth();
 
     const [showPassWord, SetShowPassWord] = useState(false);
 
     const navigate = useNavigate();
 
     const location = useLocation();
+
+    const axiosPublic = useAxiosPublic();
 
     const {
         register,
@@ -39,10 +42,40 @@ const LogInPage = () => {
     }
 
     const handleGoogleLogInButton = async () => {
+
         try {
-            await googleSignIn();
-            toast.success('Login Successful');
-            navigate(location.state ? location?.state : '/logInPage');
+            googleSignIn()
+                .then((userCredential) => {
+                    const user = userCredential.user;
+
+                    const forMongoDBDataBase = {
+                        name: user.displayName,
+                        email: user.email,
+                        photoURL: user.photoURL,
+                        role: 'user',
+                        status: 'Verified',
+                        condition: 'unblock',
+                    }
+
+                    axiosPublic.post('/users', forMongoDBDataBase)
+                        .then((response) => {
+                            if (response.data.acknowledged) {
+                                toast.success('Login Successful');
+                                navigate(location.state ? location?.state : '/logInPage');
+                                SetReload();
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });                    
+
+                })
+                .catch((error) => {
+
+                    return toast.error(error.message);
+                });
+
+
         } catch (err) {
             toast(err.message);
         }

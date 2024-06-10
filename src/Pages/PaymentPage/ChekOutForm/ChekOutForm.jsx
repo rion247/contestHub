@@ -2,8 +2,12 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import Container from "../../../components/Shared/Container";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth/useAuth";
+import useAxiosPublic from './../../../Hooks/useAxiosPublic/useAxiosPublic';
+import { toast } from "react-toastify";
+import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
+import { useQuery } from "@tanstack/react-query";
 
 const ChekOutForm = () => {
 
@@ -14,16 +18,21 @@ const ChekOutForm = () => {
     const [transactionId, SetTransactionId] = useState('');
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const singleContestData = useLoaderData();
 
     const totalPrice = singleContestData?.contestPrice;
-    console.log(totalPrice)
+    // console.log(totalPrice)
     const price = { price: totalPrice };
-    console.log(price)
+    // console.log(price)   
 
-
-    console.log(clientSecret);
+    const userInfo = {
+        participantEmail: user.email,
+        participantName: user.displayName,
+    }
 
     useEffect(() => {
         // fetch client secret
@@ -35,6 +44,25 @@ const ChekOutForm = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const title = singleContestData?.contestName;
+
+    const { isPending, error, data: backEndData = [] } = useQuery({
+        queryKey: ['participantsData', title],
+        queryFn: async () => {
+            const { data } = await axiosPublic(`/participantDataIsExist/${title}`);
+            return data;
+        }
+    })
+
+    if (isPending) return <LoadingSpinner />
+
+    if (error) return toast.error(error.message);
+
+    if (backEndData.contestName === title) {
+        navigate(location?.state ? location?.state : '/');
+        return toast.error('Sorry!!!Already Applied.');
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -77,8 +105,28 @@ const ChekOutForm = () => {
         } else {
             console.log('Payment Intent', paymentIntent)
             if (paymentIntent.status == 'succeeded') {
-                // --------------------------------------------------------
+
                 SetTransactionId(paymentIntent.id)
+
+                const participantInfo = {
+                    ...singleContestData,
+                    ...userInfo,
+                    participantTransactionId: paymentIntent.id
+
+                }
+                delete participantInfo._id;
+
+                axiosPublic.post('/participantsData', participantInfo)
+                    .then((response) => {
+                        console.log(response.data.message);
+                        if (response.data.message === 'Data Already Exist') {
+                            return toast.error('You Can not Apply for This Contest')
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+
             }
         }
     };

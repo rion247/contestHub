@@ -10,7 +10,7 @@ const PopularContestDetailsPage = () => {
 
     const axiosPublic = useAxiosPublic();
 
-    const { isPending, error, data: singleContestData = [0] } = useQuery({
+    const { isPending, error, data: singleContestData = [] } = useQuery({
         queryKey: ['singleContestData'],
         queryFn: async () => {
             const { data } = await axiosPublic(`/singleContestData/${id}`);
