@@ -21,6 +21,7 @@ import ManageUser from "../Dashboard/DashBoardPages/AdminPages/ManageUser/Manage
 import ManageContests from "../Dashboard/DashBoardPages/AdminPages/ManageContests/ManageContests";
 import PopularContestDetailsPage from "../Pages/HomePage/PopularContestSection/PopularContestDetailsPage";
 import PaymentPage from "../Pages/PaymentPage/PaymentPage";
+import SubmittedContestDetailsPage from "../Dashboard/DashBoardPages/CreatorPages/ContestSubmittedPage/SubmittedContestDetailsPage";
 
 
 const router = createBrowserRouter([
@@ -97,6 +98,12 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/contestsubmittedpage",
                 element: <ContestSubmittedPage />,
+            },
+            {
+                path: "/dashboard/contestsubmittedpage/:id",
+                element: <SubmittedContestDetailsPage />,
+                // loader: ({params}) => fetch(`http://localhost:5000/getParticipantCollectionSubmittedData/${params.id}`)
+                loader: ({params}) => fetch(`https://contest-hub-server-side-ivory.vercel.app/getParticipantCollectionSubmittedData/${params.id}`)
             },
             {
                 path: "/dashboard/manageuser",

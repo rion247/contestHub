@@ -33,7 +33,7 @@ const PopularContestSection = () => {
             <div className="max-w-xs md:max-w-2xl xl:max-w-full mx-auto grid grid-cols-1 xl:grid-cols-2 gap-6" >
 
                 {
-                    contestData.filter(item => item.contestStatus === 'accepted' && item.contestContestCategory === 'popular').slice(0,6).map(contest => <SinglePopularContest key={contest._id} contest={contest}></SinglePopularContest>)
+                    contestData.sort((a, b) => (b.participantCount - a.participantCount)).slice(0, 6).map(contest => <SinglePopularContest key={contest._id} contest={contest}></SinglePopularContest>)
                 }
 
             </div>
