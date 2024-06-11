@@ -45,24 +45,27 @@ const ChekOutForm = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const title = singleContestData?.contestName;
+    const email = user?.email;
 
     const { isPending, error, data: backEndData = [] } = useQuery({
-        queryKey: ['participantsData', title],
+        queryKey: ['participantsData', email],
         queryFn: async () => {
-            const { data } = await axiosPublic(`/participantDataIsExist/${title}`);
+            const { data } = await axiosPublic(`/participantData/${email}`);
             return data;
         }
     })
 
+    backEndData.filter(item => {
+        if (item.contestName === singleContestData.contestName) {
+            console.log(singleContestData.contestName)
+            toast.error('Already Applied for the Contest');
+            return navigate(location?.state ? location?.state : '/');
+        }
+    });
+
     if (isPending) return <LoadingSpinner />
 
     if (error) return toast.error(error.message);
-
-    if (backEndData.contestName === title) {
-        navigate(location?.state ? location?.state : '/');
-        return toast.error('Sorry!!!Already Applied.');
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -108,20 +111,40 @@ const ChekOutForm = () => {
 
                 SetTransactionId(paymentIntent.id)
 
+                const id = singleContestData._id;
+
                 const participantInfo = {
                     ...singleContestData,
+                    contestId: singleContestData._id,
+                    contestName: singleContestData.contestName,
+                    contestTypeTags: singleContestData.contestTypeTags,
+                    contestContestCategory: singleContestData.contestContestCategory,
+                    contestPrice: singleContestData.contestPrice,
+                    prizeMoney: singleContestData.prizeMoney,
+                    contestDescription: singleContestData.contestDescription,
+                    taskSubmissionTextInstruction: singleContestData.taskSubmissionTextInstruction,
+                    creatorEmail: singleContestData.creatorEmail,
+                    creatorName: singleContestData.creatorName,
+                    contestPostingDate: singleContestData.contestPostingDate,
+                    contestDeadlineDate: singleContestData.contestDeadlineDate,
+                    contestImageURL: singleContestData.contestImageURL,
                     ...userInfo,
                     participantTransactionId: paymentIntent.id
 
                 }
                 delete participantInfo._id;
+                delete participantInfo.participantCount;
+
+                console.log(participantInfo);
 
                 axiosPublic.post('/participantsData', participantInfo)
                     .then((response) => {
-                        console.log(response.data.message);
-                        if (response.data.message === 'Data Already Exist') {
-                            return toast.error('You Can not Apply for This Contest')
+
+                        if (response.data.acknowledged) {
+                            return toast.success('Your payment was successful.')
                         }
+
+
                     })
                     .catch((error) => {
                         console.log(error);

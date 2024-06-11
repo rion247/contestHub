@@ -60,8 +60,8 @@ const router = createBrowserRouter([
             {
                 path: "/payment/:_id",
                 element: <PaymentPage />,
-                loader: ({params})=>fetch(`http://localhost:5000/singleContestData/${params._id}`)
-                // loader: ({params})=>fetch(`https://contest-hub-server-side-ivory.vercel.app/singleContestData/${params._id}`)
+                // loader: ({params})=>fetch(`http://localhost:5000/singleContestData/${params._id}`)
+                loader: ({params})=>fetch(`https://contest-hub-server-side-ivory.vercel.app/singleContestData/${params._id}`)
             },
         ],
     },

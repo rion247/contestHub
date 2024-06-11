@@ -74,6 +74,8 @@ const RegistrationPage = () => {
                 role: 'user',
                 status: 'Verified',
                 condition: 'unblock',
+                winCount: parseFloat(0),
+                attemptCount: parseFloat(0),
             }
 
             createUserManually(email, password)

@@ -58,7 +58,8 @@ const AddContest = () => {
                 contestDeadlineDate,
                 contestStatus: 'pending',
                 // contestImageURL: photoURL
-                contestImageURL
+                contestImageURL,
+                participantCount: parseFloat(0),
             }
 
             const { data } = await axiosPublic.post('/contestData', contestData);
@@ -74,8 +75,6 @@ const AddContest = () => {
         }
 
     };
-
-
 
     return (
         <div className="w-full max-w-80 p-4 mx-auto md:max-w-2xl lg:max-w-4xl xl:max-w-7xl md:p-12 rounded-md shadow sm:p-8 border border-neutral-300 text-black mt-12 font-poppins mb-16 md:mb-20 lg:mb-32 xl:mb-40">

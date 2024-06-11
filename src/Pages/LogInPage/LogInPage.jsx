@@ -47,7 +47,7 @@ const LogInPage = () => {
             googleSignIn()
                 .then((userCredential) => {
                     const user = userCredential.user;
-
+                    toast.success('Login Successful');
                     const forMongoDBDataBase = {
                         name: user.displayName,
                         email: user.email,
@@ -55,12 +55,14 @@ const LogInPage = () => {
                         role: 'user',
                         status: 'Verified',
                         condition: 'unblock',
+                        winCount: parseFloat(0),
+                        attemptCount: parseFloat(0),
                     }
 
                     axiosPublic.post('/users', forMongoDBDataBase)
                         .then((response) => {
                             if (response.data.acknowledged) {
-                                toast.success('Login Successful');
+                                
                                 navigate(location.state ? location?.state : '/logInPage');
                                 SetReload();
                             }

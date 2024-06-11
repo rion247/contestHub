@@ -11,7 +11,7 @@ const SinglePopularContest = ({ contest }) => {
                 <img className="h-full rounded-lg md:rounded-none md:rounded-l-lg" src={contest.contestImageURL} alt="...Loading" />
 
                 <div className="absolute top-3 left-3">
-                    <h6 className="rounded-sm px-2 py-1 bg-sky-500 text-xs text-white uppercase font-semibold font-open-sans">Participant Count</h6>
+                    <h6 className="rounded-sm px-2 py-1 bg-sky-500 text-xs text-white uppercase font-semibold font-open-sans">Participant Count: {contest.participantCount}</h6>
                 </div>
 
             </div>
