@@ -3,6 +3,7 @@ import useAxiosPublic from './../../../Hooks/useAxiosPublic/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from './../../../LoadingSpinner/LoadingSpinner';
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const PopularContestSection = () => {
 
@@ -37,6 +38,10 @@ const PopularContestSection = () => {
                 }
 
             </div>
+
+            <Link to='/all-contests'>
+                <button className="btn bg-sky-500 text-white hover:bg-sky-400 mt-8 md:mt-16 lg:mt-20">Load More</button>
+            </Link>
 
         </div>
     );
