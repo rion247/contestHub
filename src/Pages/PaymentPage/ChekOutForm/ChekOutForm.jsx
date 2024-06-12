@@ -27,11 +27,16 @@ const ChekOutForm = () => {
     const totalPrice = singleContestData?.contestPrice;
     // console.log(totalPrice)
     const price = { price: totalPrice };
-    // console.log(price)   
+    // console.log(price) 
+
+    console.log(user.photoURL);
+
+    // participantPhotoURL
 
     const userInfo = {
-        participantEmail: user.email,
-        participantName: user.displayName,
+        participantEmail: user?.email,
+        participantName: user?.displayName,
+        participantPhotoURL: user?.photoURL
     }
 
     useEffect(() => {

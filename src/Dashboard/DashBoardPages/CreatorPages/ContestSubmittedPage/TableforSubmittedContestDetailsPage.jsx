@@ -14,7 +14,7 @@ const TableforSubmittedContestDetailsPage = ({ data }) => {
 
     const userEmail = user.email;
 
-    const { isPending, error, data: contestData = [0] } = useQuery({
+    const { isPending, error, data: contestData = [0], refetch } = useQuery({
         queryKey: ['contestData', userEmail],
         queryFn: async () => {
             const { data } = await axiosPublic(`/contestsData/${userEmail}`);
@@ -30,14 +30,16 @@ const TableforSubmittedContestDetailsPage = ({ data }) => {
 
     const participantName = data?.participantName;
     const participantEmail = data?.participantEmail;
+    const participantPhotoURL = data?.participantPhotoURL;
     const contestId = data?.contestId;
 
-    const handleDeclareWinButton = (name, email, id) => {
+    const handleDeclareWinButton = (name, email, id, photo) => {
 
 
         const winnerInfo = {
             winnerName: name,
             winnerEmail: email,
+            winnerPhotoURL: photo,
         }
 
         Swal.fire({
@@ -55,6 +57,7 @@ const TableforSubmittedContestDetailsPage = ({ data }) => {
                 if (response.data.modifiedCount > 0) {
                     const res = await axiosPublic.put(`/increaseWinCount/${email}`)
                     if (res.data.modifiedCount > 0) {
+                        refetch();
                         Swal.fire({
                             title: "Contest Winner Revealed!",
                             text: "A winner has been successfully chosen for the contest.",
@@ -68,7 +71,7 @@ const TableforSubmittedContestDetailsPage = ({ data }) => {
 
 
 
-        // console.log(winnerInfo);
+        console.log(winnerInfo);
     }
 
     return (
@@ -84,7 +87,7 @@ const TableforSubmittedContestDetailsPage = ({ data }) => {
                     {
                         (samedata[0].winnerEmail)
                             ? <button className="uppercase btn bg-red-500 hover:bg-red-600 text-white">Un-success</button>
-                            : <button onClick={() => { handleDeclareWinButton(participantName, participantEmail, contestId) }} className="uppercase btn bg-sky-500 text-white">declare win</button>
+                            : <button onClick={() => { handleDeclareWinButton(participantName, participantEmail, contestId, participantPhotoURL) }} className="uppercase btn bg-sky-500 text-white">declare win</button>
                     }
 
 
