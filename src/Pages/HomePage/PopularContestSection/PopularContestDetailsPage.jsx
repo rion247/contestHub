@@ -22,10 +22,12 @@ const PopularContestDetailsPage = () => {
 
     if (error) return toast.error(error.message);
 
-    const { contestName, contestTypeTags, contestPrice, prizeMoney, contestDescription, taskSubmissionTextInstruction, creatorEmail, creatorName, contestPostingDate, contestDeadlineDate, contestImageURL, _id } = singleContestData;
+    const { contestName, contestTypeTags, contestPrice, prizeMoney, contestDescription, taskSubmissionTextInstruction, creatorEmail, creatorName, contestPostingDate, contestDeadlineDate, contestImageURL, _id, winnerEmail, winnerName, winnerPhotoURL } = singleContestData;
 
     const postingDate = contestPostingDate.split('T')[0];
     const deadlineDate = contestDeadlineDate.split('T')[0];
+
+    console.log(singleContestData)
 
     return (
         <div className="max-w-[350px] p-4 mx-auto md:max-w-xl lg:max-w-4xl xl:max-w-7xl  mt-4 md:mt-6 lg:mt-8 xl:mt-32 font-poppins text-black mb-16 md:mb-20 lg:mb-32 xl:mb-40">
@@ -82,25 +84,31 @@ const PopularContestDetailsPage = () => {
 
                     </div>
 
-                    {/* {
-                        contestWinner && <div className="grid grid-cols-1 gap-4 text-neutral-500">
+                    <div className="pb-4 border-dashed border-b border-neutral-300">
 
-                            <div className="flex items-center justify-start gap-2 ">
+                        {
+                            winnerEmail && <div className="grid grid-cols-1 gap-4 text-neutral-500">
 
-                                <h6 className="text-base font-medium">Contest Winner:</h6>
-                                <h6 className="text-base font-medium ">{contestWinnerName}</h6>
+                                <div className="flex items-center justify-start gap-2 ">
+
+                                    <h6 className="text-base font-medium">Contest Winner:</h6>
+                                    <h6 className="text-base font-medium ">{winnerName}</h6>
+
+                                </div>
+
+                                <div className="flex items-center justify-start gap-2">
+
+                                    <h6 className="text-base font-medium">Contest Winner Email:</h6>
+                                    <h6 className="text-base font-medium ">{winnerEmail}</h6>
+
+                                </div>
 
                             </div>
+                        }
 
-                            <div className="flex items-center justify-start gap-2">
+                    </div>
 
-                                <h6 className="text-base font-medium">Contest Winner Email:</h6>
-                                <h6 className="text-base font-medium ">{contestWinnerEmail}</h6>
 
-                            </div>
-
-                        </div>
-                    } */}
 
                     <div className="grid grid-cols-1 gap-4 text-neutral-500">
 
@@ -122,7 +130,7 @@ const PopularContestDetailsPage = () => {
 
                     <div className="w-full">
                         <Link to={`/payment/${_id}`}>
-                            <button className="bg-sky-500 hover:bg-sky-400 text-white btn w-full uppercase">Contest Registration</button>
+                            <button disabled={winnerEmail} className="bg-sky-500 hover:bg-sky-400 text-white btn w-full uppercase">Contest Registration</button>
                         </Link>
                     </div>
 
