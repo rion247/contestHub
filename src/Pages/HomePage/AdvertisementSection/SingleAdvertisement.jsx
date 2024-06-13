@@ -3,7 +3,7 @@
 
 const SingleAdvertisement = ({ item, totalWinnerCount, text }) => {
 
-    console.log(totalWinnerCount, item)
+    // console.log(totalWinnerCount, item)
     return (
         <div className=" xl:container flex flex-col items-center p-4 mx-auto space-y-6">
             <h4 className="text-2xl py-4 border-y border-dashed border-neutral-300 uppercase italic text-sky-500 ">Total Contest</h4>

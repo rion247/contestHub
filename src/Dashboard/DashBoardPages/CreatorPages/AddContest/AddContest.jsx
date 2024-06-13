@@ -24,6 +24,7 @@ const AddContest = () => {
 
     const userEmail = user?.email;
     const userName = user?.displayName;
+    const creatorPhotoURL = user.photoURL;
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -60,7 +61,10 @@ const AddContest = () => {
                 // contestImageURL: photoURL
                 contestImageURL,
                 participantCount: parseFloat(0),
+                creatorPhotoURL: creatorPhotoURL,
             }
+
+            // console.log(contestData)
 
             const { data } = await axiosPublic.post('/contestData', contestData);
 
