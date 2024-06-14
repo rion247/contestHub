@@ -24,7 +24,7 @@ const MenuItems = () => {
     const links = <>
         <NavLink to="/" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Home</NavLink>
         <NavLink to="/all-contests" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>All Contests</NavLink>
-        <NavLink to="/extraRoute1" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Extra Route 1</NavLink>
+        <NavLink to="/timeVisualization" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Time Visualization</NavLink>
         <NavLink to="/extraRoute2" className={({ isActive }) => isActive ? "px-4 xl:px-6 py-3 bg-sky-500 rounded font-semibold text-white" : "px-3 xl:px-5 py-2 bg-transparent font-normal text-neutral-500"}>Extra Route 2</NavLink>
     </>
 

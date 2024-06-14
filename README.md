@@ -49,6 +49,13 @@ We believe in the power of healthy competition to inspire excellence, foster cre
 
 ---
 
+## Timeline Visualization Feature Overview:
++ Provides a clear overview of active and past contests.
++ Helps users track contest timelines and deadlines.
++ Enhances user engagement and participation in contests.
+
+---
+
 ## Useful Links:
 
 + **[Tailwind CSS](https://tailwindcss.com/)**
@@ -67,6 +74,7 @@ We believe in the power of healthy competition to inspire excellence, foster cre
 + **[JWT](https://jwt.io/libraries)**
 + **[Rechats](https://recharts.org/en-US/)**
 + **[MongoDB](https://cloud.mongodb.com)**
++ **[React Vertical Timeline](https://stephane-monnot.github.io/react-vertical-timeline/#/)**
 ---
 
 ## Required Links:

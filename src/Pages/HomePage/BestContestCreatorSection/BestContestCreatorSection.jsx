@@ -33,7 +33,7 @@ const BestContestCreatorSection = () => {
 
     const popularContestData = uniqueContests.sort((a, b) => b.participantCount - a.participantCount)
 
-    console.log(popularContestData);
+    // console.log(popularContestData);
 
     const settings = {
         dots: true,
