@@ -1,7 +1,6 @@
 
 const SingleBestContestCreator = ({ item }) => {
 
-    console.log(item);
     return (
         <div className="flex flex-col w-full shadow-lg mx-2 px-2">
 

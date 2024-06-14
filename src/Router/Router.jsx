@@ -62,7 +62,7 @@ const router = createBrowserRouter([
                 path: "/payment/:_id",
                 element: <PaymentPage />,
                 // loader: ({params})=>fetch(`http://localhost:5000/singleContestData/${params._id}`)
-                loader: ({params})=>fetch(`https://contest-hub-server-side-ivory.vercel.app/singleContestData/${params._id}`)
+                loader: ({ params }) => fetch(`https://contest-hub-server-side-ivory.vercel.app/singleContestData/${params._id}`)
             },
         ],
     },
@@ -74,6 +74,8 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <DashBoardHomePage />,
+                // loader: ()=>fetch('http://localhost:5000/users')
+                loader: () => fetch('https://contest-hub-server-side-ivory.vercel.app/users')
             },
             {
                 path: "/dashboard/myparticipatedcontest",
@@ -103,7 +105,7 @@ const router = createBrowserRouter([
                 path: "/dashboard/contestsubmittedpage/:id",
                 element: <SubmittedContestDetailsPage />,
                 // loader: ({params}) => fetch(`http://localhost:5000/getParticipantCollectionSubmittedData/${params.id}`)
-                loader: ({params}) => fetch(`https://contest-hub-server-side-ivory.vercel.app/getParticipantCollectionSubmittedData/${params.id}`)
+                loader: ({ params }) => fetch(`https://contest-hub-server-side-ivory.vercel.app/getParticipantCollectionSubmittedData/${params.id}`)
             },
             {
                 path: "/dashboard/manageuser",
@@ -113,7 +115,7 @@ const router = createBrowserRouter([
                 path: "/dashboard/managecontests",
                 element: <ManageContests />,
             },
-            
+
         ],
     },
 ]);
