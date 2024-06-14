@@ -11,11 +11,14 @@ import useAuth from "../../Hooks/useAuth/useAuth";
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
 import { toast } from "react-toastify";
 import CreatorMenu from "../Sidebar/Menu/CreatorMenu/CreatorMenu";
+// import useAdmin from "../../Hooks/useAdmin/useAdmin";
 
 
 const DashboardLayOut = () => {
 
     const [role, isLoading] = useRole();
+
+    // const [isAdmin] = useAdmin();
 
     const { logOutUser, loading } = useAuth();
 

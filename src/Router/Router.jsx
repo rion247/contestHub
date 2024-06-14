@@ -22,6 +22,10 @@ import ManageContests from "../Dashboard/DashBoardPages/AdminPages/ManageContest
 import PopularContestDetailsPage from "../Pages/HomePage/PopularContestSection/PopularContestDetailsPage";
 import PaymentPage from "../Pages/PaymentPage/PaymentPage";
 import SubmittedContestDetailsPage from "../Dashboard/DashBoardPages/CreatorPages/ContestSubmittedPage/SubmittedContestDetailsPage";
+import PrivateRoute from './../PrivateRoute/PrivateRoute';
+import AdminRoute from './../AdminRoute/AdminRoute';
+import CreatorRoute from "../CreatorRoute/CreatorRoute";
+import UserRoute from "../UserRoute/UserRoute";
 
 
 const router = createBrowserRouter([
@@ -56,7 +60,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/contestDetails/:id",
-                element: <PopularContestDetailsPage />,
+                element: <PrivateRoute><PopularContestDetailsPage /></PrivateRoute>,
             },
             {
                 path: "/payment/:_id",
@@ -69,51 +73,51 @@ const router = createBrowserRouter([
 
     {
         path: "/dashboard",
-        element: <DashboardLayOut />,
+        element: <PrivateRoute><DashboardLayOut /></PrivateRoute>,
         children: [
             {
                 index: true,
-                element: <DashBoardHomePage />,
+                element: <PrivateRoute><DashBoardHomePage /></PrivateRoute>,
                 // loader: ()=>fetch('http://localhost:5000/users')
                 loader: () => fetch('https://contest-hub-server-side-ivory.vercel.app/users')
             },
             {
                 path: "/dashboard/myparticipatedcontest",
-                element: <MyParticipatedContest />,
+                element: <UserRoute><PrivateRoute><MyParticipatedContest /></PrivateRoute></UserRoute>,
             },
             {
                 path: "/dashboard/mywinningcontestpage",
-                element: <MyWinningContestPage />,
+                element: <UserRoute><PrivateRoute><MyWinningContestPage /></PrivateRoute></UserRoute>,
             },
             {
                 path: "/dashboard/myprofile",
-                element: <MyProfile />,
+                element: <UserRoute><PrivateRoute><MyProfile /></PrivateRoute></UserRoute>,
             },
             {
                 path: "/dashboard/addcontest",
-                element: <AddContest />,
+                element: <CreatorRoute><PrivateRoute><AddContest /></PrivateRoute></CreatorRoute>,
             },
             {
                 path: "/dashboard/mycreatedcontest",
-                element: <MyCreatedContest />,
+                element: <CreatorRoute><PrivateRoute><MyCreatedContest /></PrivateRoute></CreatorRoute>,
             },
             {
                 path: "/dashboard/contestsubmittedpage",
-                element: <ContestSubmittedPage />,
+                element: <CreatorRoute><PrivateRoute><ContestSubmittedPage /></PrivateRoute></CreatorRoute>,
             },
             {
                 path: "/dashboard/contestsubmittedpage/:id",
-                element: <SubmittedContestDetailsPage />,
+                element: <CreatorRoute><PrivateRoute><SubmittedContestDetailsPage /></PrivateRoute></CreatorRoute>,
                 // loader: ({params}) => fetch(`http://localhost:5000/getParticipantCollectionSubmittedData/${params.id}`)
                 loader: ({ params }) => fetch(`https://contest-hub-server-side-ivory.vercel.app/getParticipantCollectionSubmittedData/${params.id}`)
             },
             {
                 path: "/dashboard/manageuser",
-                element: <ManageUser />,
+                element: <AdminRoute><PrivateRoute><ManageUser /></PrivateRoute></AdminRoute>,
             },
             {
                 path: "/dashboard/managecontests",
-                element: <ManageContests />,
+                element: <AdminRoute><PrivateRoute><ManageContests /></PrivateRoute></AdminRoute>,
             },
 
         ],

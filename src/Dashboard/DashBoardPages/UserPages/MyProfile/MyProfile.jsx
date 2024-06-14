@@ -48,7 +48,7 @@ const MyProfile = () => {
     ];
 
     return (
-        <div className='w-full flex justify-center flex-col items-center gap-6'>
+        <div className='w-full flex justify-center flex-col items-center gap-6 mt-6'>
 
 
             <div className='text-center w-full'>
@@ -87,7 +87,7 @@ const MyProfile = () => {
                 </ResponsiveContainer>
             </div>
 
-            <div className="flex flex-col justify-center max-w-2xl p-6 shadow-md rounded-xl sm:px-12 border border-neutral-300 text-gray-100 w-full">
+            <div className="flex flex-col justify-center max-w-2xl p-6 shadow-md rounded-xl sm:px-12 border border-neutral-300 text-gray-100 items-center">
                 <img src={userData.photoURL} alt="" className="w-32 h-32 mx-auto rounded-full bg-gray-500 aspect-square" />
                 <div className="space-y-4 text-center">
                     <div className="my-2 space-y-1 text-gray-500 ">

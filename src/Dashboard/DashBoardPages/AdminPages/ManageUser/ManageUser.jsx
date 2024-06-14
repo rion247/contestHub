@@ -1,18 +1,21 @@
 
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from './../../../../Hooks/useAxiosPublic/useAxiosPublic';
+// import useAxiosPublic from './../../../../Hooks/useAxiosPublic/useAxiosPublic';
 import TableUserData from './TableUserData/TableUserData';
 import Container from '../../../../components/Shared/Container';
-import { data } from 'autoprefixer';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure/useAxiosSecure';
+// import { axiosSecure } from './../../../../Hooks/useAxiosSecure/useAxiosSecure';
 
 const ManageUser = () => {
 
-    const axiosPublic = useAxiosPublic();
+    // const axiosPublic = useAxiosPublic();
+
+    const axiosSecure = useAxiosSecure();
 
     const { isPending, error, data: usersData, refetch } = useQuery({
         queryKey: ['usersData'],
         queryFn: async () => {
-            const { data } = await axiosPublic('/users');
+            const { data } = await axiosSecure('/users');
             return data;
         }
     })
