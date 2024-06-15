@@ -28,7 +28,7 @@ const PopularContestDetailsPage = () => {
     const postingDate = contestPostingDate.split('T')[0];
     const deadlineDate = contestDeadlineDate.split('T')[0];
 
-    console.log(singleContestData)
+    // console.log(singleContestData)
 
     return (
         <div className="max-w-[350px] p-4 mx-auto md:max-w-xl lg:max-w-4xl xl:max-w-7xl  mt-4 md:mt-6 lg:mt-8 xl:mt-32 font-poppins text-black mb-16 md:mb-20 lg:mb-32 xl:mb-40">

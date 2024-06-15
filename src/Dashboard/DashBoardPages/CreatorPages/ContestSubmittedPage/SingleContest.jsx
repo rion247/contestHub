@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const SingleContest = ({ item }) => {
 
-    console.log(item);
+    // console.log(item);
 
     return (
         <Link to={`/dashboard/contestsubmittedpage/${item.contestId}`}>

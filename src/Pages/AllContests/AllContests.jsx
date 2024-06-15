@@ -19,16 +19,14 @@ import { Helmet } from 'react-helmet';
 const AllContests = () => {
 
     const axiosPublic = useAxiosPublic();
-
+    
     const { isPending, error, data: contestData = [0] } = useQuery({
         queryKey: ['contestsData'],
         queryFn: async () => {
-            const { data } = await axiosPublic('/contestData');
+            const { data } = await axiosPublic(`/contestData`);
             return data;
         }
     })
-
-    // console.log(contestData)
 
     if (isPending) return <LoadingSpinner />
 
@@ -50,6 +48,8 @@ const AllContests = () => {
             <Helmet>
                 <title>ContestHUB | All Contests Page</title>
             </Helmet>
+
+
             <Tabs>
                 <TabList>
                     <Tab>All Contests</Tab>
@@ -139,7 +139,7 @@ const AllContests = () => {
                 </TabPanel>
 
             </Tabs>
-
+            
         </Container >
     );
 };

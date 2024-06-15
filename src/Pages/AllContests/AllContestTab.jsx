@@ -30,12 +30,9 @@ const AllContestTab = ({ item }) => {
 
             <Link to={`/contestDetails/${item._id}`}>
                 <button className="w-full text-white bg-sky-500 hover:bg-sky-400 btn">Details</button>
-            </Link>
+            </Link>          
 
         </div>
-
-
-
     );
 };
 

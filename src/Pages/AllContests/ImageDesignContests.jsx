@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const ImageDesignContests = ({ item }) => {
-    console.log(item)
+    // console.log(item)
 
     return (
         <div className="flex flex-col w-full shadow-lg h-full p-4 ">

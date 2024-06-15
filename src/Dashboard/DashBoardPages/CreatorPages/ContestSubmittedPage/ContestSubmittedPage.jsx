@@ -25,9 +25,19 @@ const ContestSubmittedPage = () => {
 
   if (isPending) return <LoadingSpinner />
 
-  if (error) return toast.error(error.message);
+  if (error) return toast.error(error.message);  
+
+  const uniquesubmittedContestData = submittedContestData.reduce((acc, current) => {
+    const x = acc.find(item => item.contestId === current.contestId);
+    if (!x) {
+        return acc.concat([current]);
+    } else {
+        return acc;
+    }
+}, []);
 
 
+// console.log(uniquesubmittedContestData)
 
   return (
     <div className="grid grid-cols-2 gap-6 mt-10 md:mt-12 p-4">
@@ -35,7 +45,7 @@ const ContestSubmittedPage = () => {
         <title>ContestHUB | Contest Submitted</title>
       </Helmet>
       {
-        submittedContestData.map(item => <SingleContest key={item._id} item={item} />)
+        uniquesubmittedContestData.map(item => <SingleContest key={item._id} item={item} />)
       }
     </div>
   );
