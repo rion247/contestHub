@@ -84,7 +84,7 @@ const AddContest = () => {
         <div className="w-full max-w-80 p-4 mx-auto md:max-w-2xl lg:max-w-4xl xl:max-w-7xl md:p-12 rounded-md shadow sm:p-8 border border-neutral-300 text-black mt-12 font-poppins mb-16 md:mb-20 lg:mb-32 xl:mb-40">
 
             <Helmet>
-                <title>ContestHub | Add Contest Page</title>
+                <title>ContestHUB | Add Contest Page</title>
             </Helmet>
 
             <div className="space-y-2 col-span-full lg:col-span-1 text-start lg:text-center mb-4 md:mb-6 lg:mb-8 xl:mb-12">

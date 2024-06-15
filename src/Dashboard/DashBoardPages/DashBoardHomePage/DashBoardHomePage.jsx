@@ -8,6 +8,7 @@ import { FaDollarSign } from 'react-icons/fa';
 import { BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import useAuth from './../../../Hooks/useAuth/useAuth';
 import { useLoaderData } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const DashBoardHomePage = () => {
 
@@ -92,6 +93,9 @@ const DashBoardHomePage = () => {
     return (
 
         <div className="p-6 my-6 text-gray-100 overflow-auto flex justify-between flex-col h-full">
+            <Helmet>
+                <title>ContestHUB | Dashboard Home </title>
+            </Helmet>
             <div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
                 <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 bg-sky-500 text-gray-100 ">
                     <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 bg-sky-500">

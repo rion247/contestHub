@@ -14,6 +14,7 @@ import GamingReviewContestData from './GamingReviewContestData';
 import MovieReview from './MovieReview';
 import BusinessIdeaConcertsContestData from './BusinessIdeaConcertsContestData';
 import BookReview from './BookReview';
+import { Helmet } from 'react-helmet';
 
 const AllContests = () => {
 
@@ -46,6 +47,9 @@ const AllContests = () => {
 
     return (
         <Container>
+            <Helmet>
+                <title>ContestHUB | All Contests Page</title>
+            </Helmet>
             <Tabs>
                 <TabList>
                     <Tab>All Contests</Tab>

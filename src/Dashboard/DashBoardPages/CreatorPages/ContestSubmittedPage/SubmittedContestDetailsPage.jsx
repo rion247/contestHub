@@ -2,6 +2,7 @@
 import { useLoaderData } from 'react-router-dom';
 import TableforSubmittedContestDetailsPage from './TableforSubmittedContestDetailsPage';
 import Container from './../../../../components/Shared/Container';
+import { Helmet } from 'react-helmet';
 const SubmittedContestDetailsPage = () => {
 
     const submittedContestData = useLoaderData();
@@ -11,6 +12,9 @@ const SubmittedContestDetailsPage = () => {
     return (
 
         <Container>
+            <Helmet>
+                <title>ContestHUB | Submitted Details</title>
+            </Helmet>
             <div className="overflow-x-auto h-auto mt-12 flex items-center">
 
                 <table className="table">

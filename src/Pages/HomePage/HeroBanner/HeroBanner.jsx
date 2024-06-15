@@ -1,9 +1,23 @@
 import { register } from 'swiper/element/bundle';
 import sliderPic1 from '../../../../src/assets/pexels-caio-56759.jpg';
 import { Link } from 'react-router-dom';
-import Container from '../../../components/Shared/Container';
+// import Container from '../../../components/Shared/Container';
+import useAxiosPublic from './../../../Hooks/useAxiosPublic/useAxiosPublic';
+import { useForm } from 'react-hook-form';
+
+
+
 register();
-const HeroBanner = () => {
+const HeroBanner = ({ SetSerach }) => {
+
+    const axiosPublic = useAxiosPublic();
+
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = async (data) => {
+        console.log(data.search);
+        SetSerach(data.search)
+    }   
 
     return (
 
@@ -15,19 +29,26 @@ const HeroBanner = () => {
                 <div className='z-30'>
                     <h2 className="w-72 md:w-[500px] lg:w-[750px] xl:w-[950px] mx-auto text-base md:text-lg lg:text-2xl xl:text-4xl text-slate-100 font-medium text-justify lg:text-center mb-6">Join us and be part of a movement that values creativity, innovation, and the spirit of competition.</h2>
 
-                    <div className=' flex justify-center my-6 md:my-9'>
-                        <input type="text" placeholder="Search Contest..." className="input w-full lg:max-w-2xl" />
-                    </div>
+                    <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <div className="text-center flex flex-col lg:flex-row gap-6 justify-center">
-                        <Link to='/all-contests'>
-                            <button className="btn  bg-transparent w-full text-sm md:text-base hover:bg-sky-500 border-white border hover:border-transparent font-normal rounded text-white tracking-wider">BROWSE CONTEST
-                            </button>
-                        </Link>
+                        <div className=' flex justify-center my-6 md:my-9'>
+                            <input {...register("search")} name='search' type="text" placeholder="Search Contest..." className="input w-full lg:max-w-2xl" />
+                        </div>
 
-                        <button className="btn text-sm md:text-base bg-sky-500 hover:bg-sky-400 border-transparent font-normal rounded text-white tracking-wider hover:border-transparent">SEARCH CONTEST</button>
+                        <div className="text-center flex flex-col lg:flex-row gap-6 justify-center">
+                            <Link to='/all-contests'>
+                                <button className="btn  bg-transparent w-full text-sm md:text-base hover:bg-sky-500 border-white border hover:border-transparent font-normal rounded text-white tracking-wider">BROWSE CONTEST
+                                </button>
+                            </Link>
 
-                    </div>
+                            <button type='submit' className="btn text-sm md:text-base bg-sky-500 hover:bg-sky-400 border-transparent font-normal rounded text-white tracking-wider hover:border-transparent">SEARCH CONTEST</button>
+
+                        </div>
+
+                    </form>
+
+
+
                 </div>
             </div>
 

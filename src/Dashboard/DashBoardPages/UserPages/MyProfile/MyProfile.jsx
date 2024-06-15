@@ -6,6 +6,7 @@ import LoadingSpinner from '../../../../LoadingSpinner/LoadingSpinner';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import UpdateUser from './UpdateUser';
+import { Helmet } from 'react-helmet';
 
 const MyProfile = () => {
 
@@ -50,7 +51,9 @@ const MyProfile = () => {
     return (
         <div className='w-full flex justify-center flex-col items-center gap-6 mt-6'>
 
-
+            <Helmet>
+                <title>ContestHUB | My Profile</title>
+            </Helmet>
             <div className='text-center w-full'>
                 <h1>Win Percentage</h1>
 

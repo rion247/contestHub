@@ -3,6 +3,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import LoadingSpinner from './../../../LoadingSpinner/LoadingSpinner';
+import { Helmet } from "react-helmet";
 
 const PopularContestDetailsPage = () => {
 
@@ -31,6 +32,10 @@ const PopularContestDetailsPage = () => {
 
     return (
         <div className="max-w-[350px] p-4 mx-auto md:max-w-xl lg:max-w-4xl xl:max-w-7xl  mt-4 md:mt-6 lg:mt-8 xl:mt-32 font-poppins text-black mb-16 md:mb-20 lg:mb-32 xl:mb-40">
+
+            <Helmet>
+                <title>ContestHub | Contest Details Page</title>
+            </Helmet>
 
             <a rel="noopener noreferrer" href="#" className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50">
                 <img src={contestImageURL} alt="...Loading" className="object-cover w-full h-full rounded lg:col-span-7 dark:bg-gray-500" />

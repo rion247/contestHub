@@ -8,6 +8,7 @@ import useAxiosPublic from './../../../Hooks/useAxiosPublic/useAxiosPublic';
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const ChekOutForm = () => {
 
@@ -29,7 +30,7 @@ const ChekOutForm = () => {
     const price = { price: totalPrice };
     // console.log(price) 
 
-    console.log(user.photoURL);
+    // console.log(user.photoURL);
 
     // participantPhotoURL
 
@@ -162,6 +163,9 @@ const ChekOutForm = () => {
 
     return (
         <Container>
+            <Helmet>
+                <title>ContestHUB | Checkout</title>
+            </Helmet>
             {/* <div className="h-screen  flex justify-center items-center"> */}
             <form onSubmit={handleSubmit}>
                 <CardElement

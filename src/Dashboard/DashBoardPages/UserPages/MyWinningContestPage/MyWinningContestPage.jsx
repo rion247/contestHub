@@ -5,6 +5,7 @@ import useAxiosPublic from './../../../../Hooks/useAxiosPublic/useAxiosPublic';
 import useAuth from './../../../../Hooks/useAuth/useAuth';
 import { toast } from 'react-toastify';
 import SingleWinningContest from './SingleWinningContest';
+import { Helmet } from 'react-helmet';
 
 const MyWinningContestPage = () => {
 
@@ -28,6 +29,9 @@ const MyWinningContestPage = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>ContestHUB | My Winning Contest</title>
+            </Helmet>
             {
                 winnerData.map(item => <SingleWinningContest key={item._id} item={item} />)
             }

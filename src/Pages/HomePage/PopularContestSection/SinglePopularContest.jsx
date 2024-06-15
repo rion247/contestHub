@@ -1,10 +1,14 @@
 import { BsCurrencyDollar } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
+AOS.init();
 
 const SinglePopularContest = ({ contest }) => {
 
     return (
-        <div className="flex flex-col md:flex-row justify-between rounded-lg border border-neutral-200 font-poppins gap-x-3" data-aos="flip-left" >
+        <div  className="flex flex-col md:flex-row justify-between rounded-lg border border-neutral-200 font-poppins gap-x-3" data-aos="flip-left"  data-aos-easing="ease-out-cubic" data-aos-duration="2000" >
 
             <div className="relative md:w-2/4">
 

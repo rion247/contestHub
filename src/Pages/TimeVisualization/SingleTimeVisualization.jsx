@@ -1,4 +1,3 @@
-// TimeVisualization.jsx
 import ContestTimeline from './Timeline';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from './../../Hooks/useAxiosPublic/useAxiosPublic';

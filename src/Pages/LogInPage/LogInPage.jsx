@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic/useAxiosPublic";
+import { Helmet } from "react-helmet";
 
 const LogInPage = () => {
 
@@ -62,14 +63,14 @@ const LogInPage = () => {
                     axiosPublic.post('/users', forMongoDBDataBase)
                         .then((response) => {
                             if (response.data.acknowledged) {
-                                
+
                                 navigate(location.state ? location?.state : '/logInPage');
                                 SetReload();
                             }
                         })
                         .catch((error) => {
                             console.log(error);
-                        });                    
+                        });
 
                 })
                 .catch((error) => {
@@ -90,6 +91,10 @@ const LogInPage = () => {
     return (
 
         <div className="bg-sky-500 flex justify-center items-center w-full min-h-full xl:min-h-screen">
+
+            <Helmet>
+                <title>ContestHUB | LogIn Page</title>
+            </Helmet>
 
             <div className="max-w-80 md:max-w-full xl:max-w-7xl mx-auto bg-white border border-transparent p-4 md:p-6 lg:p-8 xl:p-12 rounded md:rounded-md lg:rounded-lg xl:rounded-xl flex justify-center items-center font-poppins shadow my-6">
 

@@ -7,6 +7,7 @@ import TableforMyCreatedContest from './TableforMyCreatedContest';
 import LoadingSpinner from './../../../../LoadingSpinner/LoadingSpinner';
 import { toast } from 'react-toastify';
 import useAxiosPublic from '../../../../Hooks/useAxiosPublic/useAxiosPublic';
+import { Helmet } from 'react-helmet';
 
 const MyCreatedContest = () => {
 
@@ -33,6 +34,10 @@ const MyCreatedContest = () => {
         <Container>
             <div className="overflow-x-auto h-auto mt-12 flex items-center">
 
+                <Helmet>
+                    <title>ContestHUB | My Created Contest</title>
+                </Helmet>
+
                 <table className="table">
                     <thead>
                         <tr>
@@ -48,7 +53,7 @@ const MyCreatedContest = () => {
                     {
                         contests.map((item, index) => <TableforMyCreatedContest key={item._id} index={index + 1} item={item} refetch={refetch} />)
                     }
-                    
+
                 </table>
 
             </div>

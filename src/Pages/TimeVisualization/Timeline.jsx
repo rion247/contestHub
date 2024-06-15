@@ -1,4 +1,3 @@
-// src/components/Timeline.js
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { FaTrophy } from 'react-icons/fa';

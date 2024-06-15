@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import TableUserData from './TableUserData/TableUserData';
 import Container from '../../../../components/Shared/Container';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure/useAxiosSecure';
+import { Helmet } from 'react-helmet';
 // import { axiosSecure } from './../../../../Hooks/useAxiosSecure/useAxiosSecure';
 
 const ManageUser = () => {
@@ -26,6 +27,9 @@ const ManageUser = () => {
 
     return (
         <Container>
+            <Helmet>
+                <title>ContestHUB | Manage User</title>
+            </Helmet>
             <div className="overflow-x-auto h-auto mt-12 flex items-center">
 
                 <table className="table">

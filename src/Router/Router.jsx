@@ -5,7 +5,6 @@ import MainLayOut from "../MainLayOut/MainLayOut";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import HomePage from "../Pages/HomePage/HomePage";
 import AllContests from "../Pages/AllContests/AllContests";
-import ExtraRoute2 from "../Pages/ExtraRoute2/ExtraRoute2";
 import LogInPage from "../Pages/LogInPage/LogInPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import DashboardLayOut from "../Dashboard/DashboardLayOut/DashboardLayOut";
@@ -45,10 +44,6 @@ const router = createBrowserRouter([
             {
                 path: "/timeVisualization",
                 element: <TimeVisualization />,
-            },
-            {
-                path: "/extraRoute2",
-                element: <ExtraRoute2 />,
             },
             {
                 path: "/logInPage",

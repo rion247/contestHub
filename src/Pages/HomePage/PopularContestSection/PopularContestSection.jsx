@@ -5,14 +5,14 @@ import LoadingSpinner from './../../../LoadingSpinner/LoadingSpinner';
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-const PopularContestSection = () => {
+const PopularContestSection = ({ search }) => {
 
     const axiosPublic = useAxiosPublic();
 
     const { isPending, error, data: contestData = [0] } = useQuery({
-        queryKey: ['contestsData'],
+        queryKey: ['contestsData', search],
         queryFn: async () => {
-            const { data } = await axiosPublic('/contestData');
+            const { data } = await axiosPublic(`/searchByTagName?search=${search}`);
             return data;
         }
     })

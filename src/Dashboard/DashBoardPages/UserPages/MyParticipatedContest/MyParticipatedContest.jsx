@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import useAuth from './../../../../Hooks/useAuth/useAuth';
 import TableforMyParticipatedContest from './TableforMyParticipatedContest';
 import Container from '../../../../components/Shared/Container';
+import { Helmet } from 'react-helmet';
 
 
 const MyParticipatedContest = () => {
@@ -29,6 +30,9 @@ const MyParticipatedContest = () => {
     return (
 
         <Container>
+            <Helmet>
+                <title>ContestHUB | My Participated Contest </title>
+            </Helmet>
             <div className="overflow-x-auto h-auto mt-12 flex items-center">
 
                 <table className="table">

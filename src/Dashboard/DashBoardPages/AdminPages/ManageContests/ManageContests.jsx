@@ -4,6 +4,7 @@ import TableforManageContests from './TableforManageContests';
 import Container from './../../../../components/Shared/Container';
 import LoadingSpinner from './../../../../LoadingSpinner/LoadingSpinner';
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const ManageContests = () => {
 
@@ -17,13 +18,16 @@ const ManageContests = () => {
         }
     })
 
-    if (isPending) return <LoadingSpinner/>
+    if (isPending) return <LoadingSpinner />
 
     if (error) return toast(error.message);
 
 
     return (
         <Container>
+            <Helmet>
+                <title>ContestHUB | Manage Contest</title>
+            </Helmet>
             <div className="overflow-x-auto h-auto mt-12 flex items-center">
 
                 <table className="table">
