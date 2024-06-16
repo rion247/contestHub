@@ -53,8 +53,10 @@ const PopularContestDetailsPage = () => {
 
     const condition = userInfo.condition;
 
-    // console.log(condition)
 
+    const checkEmail = user.email === singleContestData.creatorEmail;
+
+    // console.log(checkEmail)
 
     return (
         <div className="max-w-[350px] p-4 mx-auto md:max-w-xl lg:max-w-4xl xl:max-w-7xl  mt-4 md:mt-6 lg:mt-8 xl:mt-32 font-poppins text-black mb-16 md:mb-20 lg:mb-32 xl:mb-40">
@@ -162,7 +164,7 @@ const PopularContestDetailsPage = () => {
                     <div className="w-full">
 
                         {
-                            winnerEmail || condition === 'block'  ? <button disabled className="bg-sky-500 hover:bg-sky-400 text-white btn w-full uppercase">Contest Registration</button>
+                            winnerEmail || condition === 'block' || checkEmail === true ? <button disabled className="bg-sky-500 hover:bg-sky-400 text-white btn w-full uppercase">Contest Registration</button>
                                 :
 
                                 <Link to={`/payment/${_id}`}>
