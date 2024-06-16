@@ -16,7 +16,7 @@ const TableforMyParticipatedContest = ({ data, email }) => {
     const taskDeadline = data?.contestDeadlineDate; 
 
     if (email === data.creatorEmail){
-        return toast.error('The access is forbidden.')
+        return toast.error('You cannot apply to your own contest.')
     }
 
         if (date > taskDeadline) {

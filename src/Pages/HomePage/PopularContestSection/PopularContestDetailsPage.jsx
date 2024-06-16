@@ -4,12 +4,34 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import LoadingSpinner from './../../../LoadingSpinner/LoadingSpinner';
 import { Helmet } from "react-helmet";
+import { useEffect, useState } from "react";
+import useAuth from "../../../Hooks/useAuth/useAuth";
+import axios from "axios";
 
 const PopularContestDetailsPage = () => {
 
     const { id } = useParams();
 
+    const [userInfo, SetUserInfo] = useState([]);
+
     const axiosPublic = useAxiosPublic();
+
+    const { user } = useAuth();
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            if (user && user.email) {
+                try {
+                    const res = await axiosPublic.get(`/user/${user.email}`);
+
+                    SetUserInfo(res.data);
+                } catch (error) {
+                    toast.error("Failed to fetch user info");
+                }
+            }
+        };
+        fetchUserInfo();
+    }, [user, axiosPublic]);
 
     const { isPending, error, data: singleContestData = [] } = useQuery({
         queryKey: ['singleContestData'],
@@ -28,7 +50,11 @@ const PopularContestDetailsPage = () => {
     const postingDate = contestPostingDate.split('T')[0];
     const deadlineDate = contestDeadlineDate.split('T')[0];
 
-    // console.log(singleContestData)
+
+    const condition = userInfo.condition;
+
+    // console.log(condition)
+
 
     return (
         <div className="max-w-[350px] p-4 mx-auto md:max-w-xl lg:max-w-4xl xl:max-w-7xl  mt-4 md:mt-6 lg:mt-8 xl:mt-32 font-poppins text-black mb-16 md:mb-20 lg:mb-32 xl:mb-40">
@@ -134,12 +160,17 @@ const PopularContestDetailsPage = () => {
                     </div>
 
                     <div className="w-full">
-                        <Link to={`/payment/${_id}`}>
-                            <button disabled={winnerEmail} className="bg-sky-500 hover:bg-sky-400 text-white btn w-full uppercase">Contest Registration</button>
-                        </Link>
+
+                        {
+                            winnerEmail || condition === 'block'  ? <button disabled className="bg-sky-500 hover:bg-sky-400 text-white btn w-full uppercase">Contest Registration</button>
+                                :
+
+                                <Link to={`/payment/${_id}`}>
+                                    <button className="bg-sky-500 hover:bg-sky-400 text-white btn w-full uppercase">Contest Registration</button>
+                                </Link>
+                        }
+
                     </div>
-
-
 
                 </div>
             </a>

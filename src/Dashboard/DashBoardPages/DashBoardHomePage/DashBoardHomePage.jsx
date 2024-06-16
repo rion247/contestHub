@@ -24,6 +24,7 @@ const DashBoardHomePage = () => {
 
     const axiosPublic = useAxiosPublic();
 
+
     const { isPending, error, data: statsData = [0] } = useQuery({
         queryKey: ['statsData', userEmail],
         queryFn: async () => {
